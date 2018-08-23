@@ -1,0 +1,49 @@
+task wrapper(type: Wrapper) {
+    //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
+    gradleVersion = "4.9"
+}
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+group = 'com.pnuema.java.barcode'
+sourceCompatibility = 1.8
+
+bootJar {
+    archiveName = 'barcode-api.jar'
+}
+
+war {
+    archiveName = 'barcode-api.war'
+}
+
+repositories {
+    jcenter()
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    implementation 'com.pnuema.java:barcode:1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
