@@ -1,4 +1,4 @@
-FROM tomcat
+FROM tomcat:alpine
 MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.war /usr/local/tomcat/webapps/
