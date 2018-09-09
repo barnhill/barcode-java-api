@@ -3,6 +3,7 @@ package com.pnuema.java.barcode.barcodeapi.controllers.v1;
 import com.pnuema.java.barcode.Barcode;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -16,6 +17,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +33,8 @@ public class BarcodeController extends AbstractV1Resource {
                                                   @RequestParam(name = "h") Optional<Integer> height,
                                                   @RequestParam(name = "label") Optional<Boolean> includeLabel,
                                                   @RequestParam(name = "barcolor") Optional<String> barColor,
-                                                  @RequestParam(name = "background") Optional<String> background) throws IOException {
+                                                  @RequestParam(name = "background") Optional<String> background,
+                                                  @RequestParam(name = "debug") Optional<Boolean> debug) throws IOException {
 
         Barcode barcode = new Barcode();
 
@@ -40,10 +44,30 @@ public class BarcodeController extends AbstractV1Resource {
         barColor.ifPresent(s -> barcode.setForeColor(hex2Rgb(s)));
         background.ifPresent(s -> barcode.setBackColor(hex2Rgb(s)));
 
+        //attach debug info to header
+        HttpHeaders responseHeaders = new HttpHeaders();
+        debug.ifPresent((show) -> {
+            if (show) {
+                responseHeaders.set("X-Served-By", getMachineName());
+            }
+        });
+
         return ResponseEntity
                 .ok()
+                .headers(responseHeaders)
                 .contentType(MediaType.IMAGE_PNG)
                 .body(getImgBytes((BufferedImage) barcode.encode(convertTypeStringToEnum(type), data)));
+    }
+
+    private String getMachineName() {
+        try {
+            InetAddress addr;
+            addr = InetAddress.getLocalHost();
+            return addr.getHostName();
+        }
+        catch (UnknownHostException ex) {
+            return "Unknown";
+        }
     }
 
     @Nullable
