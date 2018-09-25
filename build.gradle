@@ -1,10 +1,10 @@
 task wrapper(type: Wrapper) {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "4.10"
+    gradleVersion = "4.10.2"
 }
 buildscript {
     ext {
-        springBootVersion = '2.0.4.RELEASE'
+        springBootVersion = '2.0.5.RELEASE'
     }
     repositories {
         jcenter()
