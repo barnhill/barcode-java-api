@@ -4,7 +4,7 @@ task wrapper(type: Wrapper) {
 }
 buildscript {
     ext {
-        springBootVersion = '2.0.5.RELEASE'
+        springBootVersion = '2.0.6.RELEASE'
     }
     repositories {
         jcenter()
