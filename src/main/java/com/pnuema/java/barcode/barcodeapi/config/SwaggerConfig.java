@@ -27,7 +27,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Bardode API",
+                "Barcode API",
                 "Barcode API",
                 "1.0",
                 "Terms of service",
