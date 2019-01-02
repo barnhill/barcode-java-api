@@ -4,6 +4,7 @@ import com.pnuema.java.barcode.Barcode;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -171,5 +172,11 @@ public class BarcodeController extends AbstractV1Resource {
         }
 
         return null;
+    }
+
+    @GetMapping(value = "/barcode/error")
+    @Cacheable("barcodes")
+    public ResponseEntity<Character> getBarcodeImage() throws IOException {
+        return new ResponseEntity<>("var".charAt(30), HttpStatus.OK);
     }
 }
