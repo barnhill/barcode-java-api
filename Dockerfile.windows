@@ -1,10 +1,12 @@
-FROM openjdk:9-nanoserver
+FROM openjdk:8-nanoserver
 MAINTAINER bradfordbarnhill@gmail.com
+WORKDIR /app
 
-ADD build/libs/barcode-api.jar /
+ADD build/libs/barcode-api.jar .
 
-VOLUME /tmp
+VOLUME c:/tmp
 
-EXPOSE 8181
+EXPOSE 80
+EXPOSE 443
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/barcode-api.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "barcode-api.jar"]
