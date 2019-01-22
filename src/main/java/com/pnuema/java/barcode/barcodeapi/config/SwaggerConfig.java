@@ -32,6 +32,6 @@ public class SwaggerConfig {
                 "1.0",
                 "Terms of service",
                 new Contact("Brad Barnhill", "www.bradbarnhill.com", "bradfordbarnhill@gmail.com"),
-                "License of API", "www.pnuema.com", Collections.emptyList());
+                "License of API", "https://raw.githubusercontent.com/barnhill/barcode-java-api/master/LICENSE", Collections.emptyList());
     }
 }
