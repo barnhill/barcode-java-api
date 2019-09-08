@@ -45,7 +45,8 @@ public class BarcodeController extends AbstractV1Resource {
         barColor.ifPresent(s -> barcode.setForeColor(hex2Rgb(s)));
         background.ifPresent(s -> barcode.setBackColor(hex2Rgb(s)));
 
-        //attach debug info to header
+        Barcode.TYPE typeEnum = convertTypeStringToEnum(type);
+
         HttpHeaders responseHeaders = new HttpHeaders();
         debug.ifPresent((show) -> {
             if (show) {
@@ -53,11 +54,36 @@ public class BarcodeController extends AbstractV1Resource {
             }
         });
 
+        if (typeEnum == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .headers(responseHeaders)
+                    .body(null);
+        }
+
+        BufferedImage image = (BufferedImage) barcode.encode(typeEnum, data);
+
+        //attach debug info to header
+        debug.ifPresent((show) -> {
+            if (show) {
+                responseHeaders.set("X-Encoded-Value",  barcode.getEncodedValue());
+                responseHeaders.set("X-Raw-Value", barcode.getRawData());
+                responseHeaders.set("X-Label-Font", barcode.getLabelFont().getName());
+            }
+        });
+
+        if (image == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .headers(responseHeaders)
+                    .body(null);
+        }
+
         return ResponseEntity
                 .ok()
                 .headers(responseHeaders)
                 .contentType(MediaType.IMAGE_PNG)
-                .body(getImgBytes((BufferedImage) barcode.encode(convertTypeStringToEnum(type), data)));
+                .body(getImgBytes(image));
     }
 
     private String getMachineName() {
