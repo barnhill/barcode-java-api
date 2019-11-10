@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM gcr.io/distroless/java:11
 MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /
