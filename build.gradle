@@ -1,13 +1,13 @@
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "5.6.2"
+    gradleVersion = "6.0"
 }
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.8.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.1.RELEASE")
     }
 }
 
@@ -40,7 +40,7 @@ configurations {
 }
 
 dependencies {
-    implementation 'com.pnuema.java:barcode:1.5'
+    implementation 'com.pnuema.java:barcode:1.6'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'io.springfox:springfox-swagger2:2.9.2'
