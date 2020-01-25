@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.7'
 services:
   linux:
     # Linux Container
@@ -7,4 +7,6 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
+    expose:
+      - 8080
     image: bradbarnhill/barcode-api
