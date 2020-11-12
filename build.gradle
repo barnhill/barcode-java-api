@@ -44,6 +44,6 @@ dependencies {
     implementation 'com.pnuema.java:barcode:1.7'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    implementation "org.springdoc:springdoc-openapi-ui:1.2.32"
+    implementation "org.springdoc:springdoc-openapi-ui:1.4.8"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
