@@ -1,7 +1,6 @@
 package com.pnuema.java.barcode.barcodeapi.controllers.v1;
 
 import com.pnuema.java.barcode.Barcode;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,6 @@ import java.util.Optional;
 @RestController
 public class BarcodeController extends AbstractV1Resource {
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-    @ApiOperation("Returns a barcode image")
     @GetMapping(value = "/barcode/{type}/data/{data}")
     @Cacheable("barcodes")
     public ResponseEntity<byte[]> getBarcodeImage(@PathVariable String type,
