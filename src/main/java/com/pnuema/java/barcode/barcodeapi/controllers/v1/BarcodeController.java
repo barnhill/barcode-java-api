@@ -32,8 +32,7 @@ public class BarcodeController extends AbstractV1Resource {
                                                   @RequestParam(name = "h") Optional<Integer> height,
                                                   @RequestParam(name = "label") Optional<Boolean> includeLabel,
                                                   @RequestParam(name = "barcolor") Optional<String> barColor,
-                                                  @RequestParam(name = "background") Optional<String> background,
-                                                  @RequestParam(name = "debug") Optional<Boolean> debug) throws IOException {
+                                                  @RequestParam(name = "background") Optional<String> background) throws IOException {
 
         Barcode barcode = new Barcode();
 
@@ -46,11 +45,6 @@ public class BarcodeController extends AbstractV1Resource {
         Barcode.TYPE typeEnum = convertTypeStringToEnum(type);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        debug.ifPresent((show) -> {
-            if (show) {
-                responseHeaders.set("X-Served-By", getMachineName());
-            }
-        });
 
         if (typeEnum == null) {
             return ResponseEntity
@@ -62,13 +56,14 @@ public class BarcodeController extends AbstractV1Resource {
         BufferedImage image = (BufferedImage) barcode.encode(typeEnum, data);
 
         //attach debug info to header
-        debug.ifPresent((show) -> {
-            if (show) {
-                responseHeaders.set("X-Encoded-Value",  barcode.getEncodedValue());
-                responseHeaders.set("X-Raw-Value", barcode.getRawData());
-                responseHeaders.set("X-Label-Font", barcode.getLabelFont().getName());
-            }
-        });
+        responseHeaders.set("X-Barcode", barcode.getTitle() + " " + barcode.getVersion());
+        responseHeaders.set("X-Encoded-Type", typeEnum.name());
+        responseHeaders.set("X-Encoded-Value",  barcode.getEncodedValue());
+        responseHeaders.set("X-Encoding-Time", barcode.getEncodingTime() + "ms");
+        responseHeaders.set("X-Draw-Time",  barcode.getDrawTime() + "ms");
+        responseHeaders.set("X-Raw-Value", barcode.getRawData());
+        responseHeaders.set("X-Label-Font", barcode.getLabelFont().getName());
+        responseHeaders.set("X-Served-By", getMachineName());
 
         if (image == null) {
             return ResponseEntity
