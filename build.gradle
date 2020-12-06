@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.3.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.0")
     }
 }
 
@@ -19,7 +19,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 
 group = 'com.pnuema.java.barcode'
-version '1.9'
+version '1.10'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -40,10 +40,15 @@ configurations {
     providedRuntime
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation 'com.pnuema.java:barcode:1.9'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation "org.springdoc:springdoc-openapi-ui:1.4.8"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.3'
 }
