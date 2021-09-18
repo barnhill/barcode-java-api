@@ -1,14 +1,3 @@
 spring:
   profiles:
     active: prod
-
-server:
-  port: 8080
-  compression:
-    enabled: true
-  servlet:
-    session:
-      timeout: 10s
-  error:
-    whitelabel:
-      enabled: false

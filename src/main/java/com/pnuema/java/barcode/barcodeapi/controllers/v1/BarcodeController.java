@@ -53,7 +53,13 @@ public class BarcodeController extends AbstractV1Resource {
                     .body(null);
         }
 
-        BufferedImage image = (BufferedImage) barcode.encode(typeEnum, data);
+        BufferedImage image = null;
+        Exception exception = null;
+        try {
+            image = (BufferedImage) barcode.encode(typeEnum, data);
+        } catch (Exception ex) {
+            exception = ex;
+        }
 
         //attach debug info to header
         responseHeaders.set("X-Barcode", barcode.getTitle() + " " + barcode.getVersion());
@@ -65,7 +71,7 @@ public class BarcodeController extends AbstractV1Resource {
         responseHeaders.set("X-Label-Font", barcode.getLabelFont().getName());
         responseHeaders.set("X-Served-By", getMachineName());
 
-        if (image == null) {
+        if (exception != null || image == null) {
             return ResponseEntity
                     .badRequest()
                     .headers(responseHeaders)

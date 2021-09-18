@@ -1,13 +1,13 @@
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "6.7.1"
+    gradleVersion = "7.2"
 }
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.0")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.4")
     }
 }
 
@@ -19,9 +19,9 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 
 group = 'com.pnuema.java.barcode'
-version '1.10'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+version '1.11'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 bootJar {
     archiveName = 'barcode-api.jar'
@@ -33,7 +33,7 @@ war {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
 }
 
 configurations {
@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.pnuema.java:barcode:1.9'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    implementation "org.springdoc:springdoc-openapi-ui:1.4.8"
+    implementation "org.springdoc:springdoc-openapi-ui:1.5.10"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.3'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0'
 }
