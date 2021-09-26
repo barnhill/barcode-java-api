@@ -1,15 +1,16 @@
 version: '3.7'
+
 services:
   barcode-server:
     container_name: barcode-server
-    image: bradbarnhill/barcode-api
+    image: bradbarnhill/barcode-api:latest
     networks:
       - spring-cloud-network
     build:
       context: .
       dockerfile: ./Dockerfile
       args:
-        SSL_PASSWORD: ${BARCODE_SSL_PASSWORD}
+        BARCODE_SSL_PASSWORD: ${BARCODE_SSL_PASSWORD}
     ports:
       - "8080:8080"
     expose:
