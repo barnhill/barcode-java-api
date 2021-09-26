@@ -14,6 +14,6 @@ server:
     enabled: true
     key-store-type: PKCS12
     key-store: classpath:keystore/pnuema.p12
-    key-store-password: ${SSL_PASSWORD}
+    key-store-password: ${BARCODE_SSL_PASSWORD}
     key-alias: 1
 
