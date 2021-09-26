@@ -1,3 +1,3 @@
 ./gradlew clean bootJar
-docker-compose build linux
-docker-compose push linux
+docker-compose build barcode-server
+docker-compose push barcode-server
