@@ -21,3 +21,5 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build the Docker image
       run: ./dockerbuild.sh
+      env:
+        BARCODE_SSL_PASSWORD: ${{ secrets.BARCODE_SSL_PASSWORD }}
