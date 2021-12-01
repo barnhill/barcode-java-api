@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/java:11
+FROM arm64v8/openjdk:slim
 MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /
