@@ -19,7 +19,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 
 group = 'com.pnuema.java.barcode'
-version '1.11'
+version '1.12'
 sourceCompatibility = 11
 targetCompatibility = 11
 
