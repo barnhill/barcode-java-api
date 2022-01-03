@@ -1,13 +1,13 @@
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "7.3"
+    gradleVersion = "7.3.3"
 }
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.1")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.2")
     }
 }
 
@@ -45,10 +45,10 @@ test {
 }
 
 dependencies {
-    implementation 'com.pnuema.java:barcode:1.9'
+    implementation 'com.pnuema.java:barcode:1.11'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    implementation "org.springdoc:springdoc-openapi-ui:1.5.13"
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 }
