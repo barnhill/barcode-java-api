@@ -19,7 +19,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 
 group = 'com.pnuema.java.barcode'
-version '1.12'
+version '1.13'
 sourceCompatibility = 11
 targetCompatibility = 11
 
@@ -45,7 +45,7 @@ test {
 }
 
 dependencies {
-    implementation 'com.pnuema.java:barcode:1.12'
+    implementation 'com.pnuema.java:barcode:1.13'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'

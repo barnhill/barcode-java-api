@@ -63,14 +63,14 @@ public class BarcodeController extends AbstractV1Resource {
         }
 
         //attach debug info to header
-        responseHeaders.set("X-Barcode", barcode.getTitle() + " " + barcode.getVersion());
-        responseHeaders.set("X-Encoded-Type", typeEnum.name());
-        responseHeaders.set("X-Encoded-Value",  barcode.getEncodedValue());
-        responseHeaders.set("X-Encoding-Time", barcode.getEncodingTime() + "ms");
-        responseHeaders.set("X-Draw-Time",  barcode.getDrawTime() + "ms");
-        responseHeaders.set("X-Raw-Value", barcode.getRawData());
-        responseHeaders.set("X-Label-Font", barcode.getLabelFont().getName());
-        responseHeaders.set("X-Served-By", getMachineName());
+        responseHeaders.set("x-barcode-version", barcode.getTitle() + " " + barcode.getVersion());
+        responseHeaders.set("x-encoded-type", typeEnum.name());
+        responseHeaders.set("x-encoded-value",  barcode.getEncodedValue());
+        responseHeaders.set("x-encoding-time", barcode.getEncodingTime() + " ms");
+        responseHeaders.set("x-draw-time",  barcode.getDrawTime() + " ms");
+        responseHeaders.set("x-raw-value", barcode.getRawData());
+        responseHeaders.set("x-label-font", barcode.getLabelFont().getName());
+        responseHeaders.set("x-served-by", getMachineName());
 
         if (exception != null || image == null) {
             return ResponseEntity
