@@ -45,10 +45,10 @@ test {
 }
 
 dependencies {
-    implementation 'com.pnuema.java:barcode:1.11'
+    implementation 'com.pnuema.java:barcode:1.12'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 }

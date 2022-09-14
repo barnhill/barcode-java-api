@@ -1,6 +1,7 @@
 package com.pnuema.java.barcode.barcodeapi.controllers.v1;
 
 import com.pnuema.java.barcode.Barcode;
+import com.pnuema.java.barcode.EncodingType;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,7 @@ public class BarcodeController extends AbstractV1Resource {
         barColor.ifPresent(s -> barcode.setForeColor(hex2Rgb(s)));
         background.ifPresent(s -> barcode.setBackColor(hex2Rgb(s)));
 
-        Barcode.TYPE typeEnum = convertTypeStringToEnum(type);
+        EncodingType typeEnum = convertTypeStringToEnum(type);
 
         HttpHeaders responseHeaders = new HttpHeaders();
 
@@ -97,72 +98,72 @@ public class BarcodeController extends AbstractV1Resource {
     }
 
     @Nullable
-    private Barcode.TYPE convertTypeStringToEnum(String type) {
+    private EncodingType convertTypeStringToEnum(String type) {
         switch (type.toLowerCase()) {
             case "telepen":
-                return Barcode.TYPE.TELEPEN;
+                return EncodingType.TELEPEN;
             case "standard2of5":
             case "industrial2of5":
-                return Barcode.TYPE.Standard2of5;
+                return EncodingType.Standard2of5;
             case "postnet":
-                return Barcode.TYPE.PostNet;
+                return EncodingType.PostNet;
             case "pharmacode":
-                return Barcode.TYPE.PHARMACODE;
+                return EncodingType.PHARMACODE;
             case "msi2mod10":
-                return Barcode.TYPE.MSI_2Mod10;
+                return EncodingType.MSI_2Mod10;
             case "msimod10":
-                return Barcode.TYPE.MSI_Mod10;
+                return EncodingType.MSI_Mod10;
             case "msimod11":
-                return Barcode.TYPE.MSI_Mod11;
+                return EncodingType.MSI_Mod11;
             case "msimod11mod10":
-                return Barcode.TYPE.MSI_Mod11_Mod10;
+                return EncodingType.MSI_Mod11_Mod10;
             case "jan13":
-                return Barcode.TYPE.JAN13;
+                return EncodingType.JAN13;
             case "itf14":
-                return Barcode.TYPE.ITF14;
+                return EncodingType.ITF14;
             case "isbn":
             case "bookland":
-                return Barcode.TYPE.ISBN;
+                return EncodingType.ISBN;
             case "interleaved2of5":
-                return Barcode.TYPE.Interleaved2of5;
+                return EncodingType.Interleaved2of5;
             case "fim":
-                return Barcode.TYPE.FIM;
+                return EncodingType.FIM;
             case "code128a":
-                return Barcode.TYPE.CODE128A;
+                return EncodingType.CODE128A;
             case "code128b":
-                return Barcode.TYPE.CODE128B;
+                return EncodingType.CODE128B;
             case "code128c":
-                return Barcode.TYPE.CODE128C;
+                return EncodingType.CODE128C;
             case "code128":
-                return Barcode.TYPE.CODE128;
+                return EncodingType.CODE128;
             case "code93":
-                return Barcode.TYPE.CODE93;
+                return EncodingType.CODE93;
             case "code39mod43":
-                return Barcode.TYPE.CODE39_Mod43;
+                return EncodingType.CODE39_Mod43;
             case "code39":
             case "logmars":
-                return Barcode.TYPE.CODE39;
+                return EncodingType.CODE39;
             case "code39extended":
-                return Barcode.TYPE.CODE39Extended;
+                return EncodingType.CODE39Extended;
             case "code11":
             case "usd8":
-                return Barcode.TYPE.CODE11;
+                return EncodingType.CODE11;
             case "codabar":
-                return Barcode.TYPE.Codabar;
+                return EncodingType.Codabar;
             case "upca":
             case "ucc12":
-                return Barcode.TYPE.UPCA;
+                return EncodingType.UPCA;
             case "upc3":
-                return Barcode.TYPE.UPCE;
+                return EncodingType.UPCE;
             case "upcsup2":
-                return Barcode.TYPE.UPC_SUPPLEMENTAL_2DIGIT;
+                return EncodingType.UPC_SUPPLEMENTAL_2DIGIT;
             case "upcsup5":
-                return Barcode.TYPE.UPC_SUPPLEMENTAL_5DIGIT;
+                return EncodingType.UPC_SUPPLEMENTAL_5DIGIT;
             case "ean8":
-                return Barcode.TYPE.EAN8;
+                return EncodingType.EAN8;
             case "ean13":
             case "ucc13":
-                return Barcode.TYPE.EAN13;
+                return EncodingType.EAN13;
         }
 
         return null;
@@ -197,11 +198,5 @@ public class BarcodeController extends AbstractV1Resource {
         }
 
         return null;
-    }
-
-    @GetMapping(value = "/barcode/error")
-    @Cacheable("barcodes")
-    public ResponseEntity<Character> getBarcodeImage() throws IOException {
-        return new ResponseEntity<>("var".charAt(30), HttpStatus.OK);
     }
 }
