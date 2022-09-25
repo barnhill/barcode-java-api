@@ -1,5 +1,6 @@
 services:
   linux:
+    platform: linux/arm64
     # Linux Container
     build:
       context: .
