@@ -1,13 +1,13 @@
 wrapper {
     //if you change this version you will need to run the 'gradlew wrapper' command twice from the command line to auto update the gradle cache
-    gradleVersion = "7.4"
+    gradleVersion = "7.5.1"
 }
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.3")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.3")
     }
 }
 
