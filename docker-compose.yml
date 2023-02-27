@@ -1,10 +1,21 @@
 services:
-  linux:
+  linux-arm64:
     platform: linux/arm64
     # Linux Container
     build:
       context: .
       dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    image: bradbarnhill/barcode-api
+  linux-amd64:
+    platform: linux/amd64
+    # Linux Container
+    build:
+      context: .
+      dockerfile: ./Dockerfile-amd64
     ports:
       - "8080:8080"
     expose:

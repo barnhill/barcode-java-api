@@ -1,3 +1,6 @@
 ./gradlew clean bootJar
-docker-compose build linux
-docker-compose push linux
+docker-compose build linux-amd64
+docker-compose push linux-amd64
+
+docker-compose build linux-arm64
+docker-compose push linux-arm64
