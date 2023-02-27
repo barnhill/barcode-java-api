@@ -1,1 +1,1 @@
-docker run --rm -p 8080:8080 bradbarnhill/barcode-api
+docker run --rm -p 8080:8080 bradbarnhill/barcode-api:arm64
