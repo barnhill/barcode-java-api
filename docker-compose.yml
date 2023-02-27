@@ -9,7 +9,7 @@ services:
       - "8080:8080"
     expose:
       - 8080
-    image: bradbarnhill/barcode-api
+    image: bradbarnhill/barcode-api:arm64
   linux-amd64:
     platform: linux/amd64
     # Linux Container
@@ -20,4 +20,4 @@ services:
       - "8080:8080"
     expose:
       - 8080
-    image: bradbarnhill/barcode-api
+    image: bradbarnhill/barcode-api:amd64

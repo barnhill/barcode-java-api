@@ -24,11 +24,11 @@ sourceCompatibility = 17
 targetCompatibility = 17
 
 bootJar {
-    archiveBaseName = 'barcode-api.jar'
+    archiveFileName = 'barcode-api.jar'
 }
 
 war {
-    archiveBaseName = 'barcode-api.war'
+    archiveFileName = 'barcode-api.war'
 }
 
 repositories {
