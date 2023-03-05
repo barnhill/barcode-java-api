@@ -1,4 +1,4 @@
-FROM arm64v8/openjdk:slim
+FROM amazoncorretto:17
 MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /

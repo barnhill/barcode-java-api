@@ -2,16 +2,13 @@ package com.pnuema.java.barcode.barcodeapi.controllers.v1;
 
 import com.pnuema.java.barcode.Barcode;
 import com.pnuema.java.barcode.EncodingType;
+import com.pnuema.java.barcode.barcodeapi.BarcodeBody;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -24,16 +21,54 @@ import java.util.Optional;
 
 @RestController
 public class BarcodeController extends AbstractV1Resource {
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+
     @GetMapping(value = "/barcode/{type}/data/{data}")
     @Cacheable("barcodes")
-    public ResponseEntity<byte[]> getBarcodeImage(@PathVariable String type,
-                                                  @PathVariable String data,
-                                                  @RequestParam(name = "w") Optional<Integer> width,
-                                                  @RequestParam(name = "h") Optional<Integer> height,
-                                                  @RequestParam(name = "label") Optional<Boolean> includeLabel,
-                                                  @RequestParam(name = "barcolor") Optional<String> barColor,
-                                                  @RequestParam(name = "background") Optional<String> background) throws IOException {
+    public ResponseEntity<byte[]> getBarcodeImage(
+            @PathVariable String type,
+            @PathVariable String data,
+            @RequestParam(name = "w") Optional<Integer> width,
+            @RequestParam(name = "h") Optional<Integer> height,
+            @RequestParam(name = "label") Optional<Boolean> includeLabel,
+            @RequestParam(name = "barcolor") Optional<String> barColor,
+            @RequestParam(name = "background") Optional<String> background) throws IOException {
+
+        return generateBarcode(
+                type,
+                data,
+                width,
+                height,
+                includeLabel,
+                barColor,
+                background
+        );
+    }
+
+    @PostMapping(value = "/barcode/",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Cacheable("barcodes")
+    public ResponseEntity<byte[]> getBarcodeImage(@RequestBody BarcodeBody body) throws IOException {
+
+        return generateBarcode(
+                body.getType(),
+                body.getData(),
+                body.getW(),
+                body.getH(),
+                body.isLabel(),
+                body.getBarcolor(),
+                body.getBackground()
+        );
+    }
+
+    private ResponseEntity<byte[]> generateBarcode(
+            String type,
+            String data,
+            Optional<Integer> width,
+            Optional<Integer> height,
+            Optional<Boolean> includeLabel,
+            Optional<String> barColor,
+            Optional<String> background) throws IOException {
 
         Barcode barcode = new Barcode();
 
@@ -99,74 +134,39 @@ public class BarcodeController extends AbstractV1Resource {
 
     @Nullable
     private EncodingType convertTypeStringToEnum(String type) {
-        switch (type.toLowerCase()) {
-            case "telepen":
-                return EncodingType.TELEPEN;
-            case "standard2of5":
-            case "industrial2of5":
-                return EncodingType.Standard2of5;
-            case "postnet":
-                return EncodingType.PostNet;
-            case "pharmacode":
-                return EncodingType.PHARMACODE;
-            case "msi2mod10":
-                return EncodingType.MSI_2Mod10;
-            case "msimod10":
-                return EncodingType.MSI_Mod10;
-            case "msimod11":
-                return EncodingType.MSI_Mod11;
-            case "msimod11mod10":
-                return EncodingType.MSI_Mod11_Mod10;
-            case "jan13":
-                return EncodingType.JAN13;
-            case "itf14":
-                return EncodingType.ITF14;
-            case "isbn":
-            case "bookland":
-                return EncodingType.ISBN;
-            case "interleaved2of5":
-                return EncodingType.Interleaved2of5;
-            case "fim":
-                return EncodingType.FIM;
-            case "code128a":
-                return EncodingType.CODE128A;
-            case "code128b":
-                return EncodingType.CODE128B;
-            case "code128c":
-                return EncodingType.CODE128C;
-            case "code128":
-                return EncodingType.CODE128;
-            case "code93":
-                return EncodingType.CODE93;
-            case "code39mod43":
-                return EncodingType.CODE39_Mod43;
-            case "code39":
-            case "logmars":
-                return EncodingType.CODE39;
-            case "code39extended":
-                return EncodingType.CODE39Extended;
-            case "code11":
-            case "usd8":
-                return EncodingType.CODE11;
-            case "codabar":
-                return EncodingType.Codabar;
-            case "upca":
-            case "ucc12":
-                return EncodingType.UPCA;
-            case "upc3":
-                return EncodingType.UPCE;
-            case "upcsup2":
-                return EncodingType.UPC_SUPPLEMENTAL_2DIGIT;
-            case "upcsup5":
-                return EncodingType.UPC_SUPPLEMENTAL_5DIGIT;
-            case "ean8":
-                return EncodingType.EAN8;
-            case "ean13":
-            case "ucc13":
-                return EncodingType.EAN13;
-        }
+        return switch (type.toLowerCase()) {
+            case "telepen" -> EncodingType.TELEPEN;
+            case "standard2of5", "industrial2of5" -> EncodingType.Standard2of5;
+            case "postnet" -> EncodingType.PostNet;
+            case "pharmacode" -> EncodingType.PHARMACODE;
+            case "msi2mod10" -> EncodingType.MSI_2Mod10;
+            case "msimod10" -> EncodingType.MSI_Mod10;
+            case "msimod11" -> EncodingType.MSI_Mod11;
+            case "msimod11mod10" -> EncodingType.MSI_Mod11_Mod10;
+            case "jan13" -> EncodingType.JAN13;
+            case "itf14" -> EncodingType.ITF14;
+            case "isbn", "bookland" -> EncodingType.ISBN;
+            case "interleaved2of5" -> EncodingType.Interleaved2of5;
+            case "fim" -> EncodingType.FIM;
+            case "code128a" -> EncodingType.CODE128A;
+            case "code128b" -> EncodingType.CODE128B;
+            case "code128c" -> EncodingType.CODE128C;
+            case "code128" -> EncodingType.CODE128;
+            case "code93" -> EncodingType.CODE93;
+            case "code39mod43" -> EncodingType.CODE39_Mod43;
+            case "code39", "logmars" -> EncodingType.CODE39;
+            case "code39extended" -> EncodingType.CODE39Extended;
+            case "code11", "usd8" -> EncodingType.CODE11;
+            case "codabar" -> EncodingType.Codabar;
+            case "upca", "ucc12" -> EncodingType.UPCA;
+            case "upc3" -> EncodingType.UPCE;
+            case "upcsup2" -> EncodingType.UPC_SUPPLEMENTAL_2DIGIT;
+            case "upcsup5" -> EncodingType.UPC_SUPPLEMENTAL_5DIGIT;
+            case "ean8" -> EncodingType.EAN8;
+            case "ean13", "ucc13" -> EncodingType.EAN13;
+            default -> null;
+        };
 
-        return null;
     }
 
     private byte [] getImgBytes(BufferedImage image) throws IOException {
@@ -177,7 +177,7 @@ public class BarcodeController extends AbstractV1Resource {
 
     /**
      *
-     * @param colorStr e.g. "FFFFFF" or "00FFFFF"
+     * @param colorStr e.g. "FFFFFF" or "00FFFF"
      * @return {@link Color}
      */
     @Nullable
