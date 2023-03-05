@@ -1,6 +1,3 @@
 ./gradlew clean bootJar
-docker-compose build linux-amd64
-docker-compose push linux-amd64
 
-docker-compose build linux-arm64
-docker-compose push linux-arm64
+docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag bradbarnhill/barcode-api:latest .

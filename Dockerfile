@@ -1,4 +1,4 @@
-FROM amd64/amazoncorretto:19
+FROM amazoncorretto:19
 MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /

@@ -4,7 +4,7 @@ services:
     # Linux Container
     build:
       context: .
-      dockerfile: ./Dockerfile-arm64
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     expose:
@@ -15,7 +15,7 @@ services:
     # Linux Container
     build:
       context: .
-      dockerfile: ./Dockerfile-amd64
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     expose:
