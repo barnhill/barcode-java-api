@@ -1,4 +1,4 @@
-FROM amazoncorretto:17
+FROM amazoncorretto:17-alpine
 MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /
