@@ -1,0 +1,24 @@
+[versions]
+#libs
+barcode = "1.15"
+openapi-ui = "2.1.0"
+
+#plugins
+kotlin= "1.9.0"
+springBootVersion="3.1.1"
+springDepManagementVersion = "1.1.0"
+
+[libraries]
+jackson-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+spring-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+spring-starter-tomcat = { group = "org.springframework.boot", name = "spring-boot-starter-tomcat" }
+spring-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+openapi-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "openapi-ui" }
+barcode = { group = "com.pnuema.java", name = "barcode", version.ref = "barcode" }
+
+[plugins]
+springBoot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
+springDepManagement = { id = "io.spring.dependency-management", version.ref = "springDepManagementVersion" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
