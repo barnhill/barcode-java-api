@@ -8,6 +8,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
+import java.security.Security;
+
 @OpenAPIDefinition(servers = {
         @Server(url = "https://barcodeapi.link/", description = "Remote"),
         @Server(url = "http://localhost:8080/", description = "Local")
