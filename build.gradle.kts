@@ -1,5 +1,5 @@
 buildscript {
-    extra["gradleVersion"] = "8.3"
+    extra["gradleVersion"] = "8.4"
 }
 
 val gradleVersion: String by extra
@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "com.pnuema.java.barcode"
-version "1.19"
+version "2.3"
 
 dependencies {
     implementation(libs.barcode)
