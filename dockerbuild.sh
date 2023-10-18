@@ -1,3 +1,3 @@
 ./gradlew clean bootJar
-docker-compose build barcode-server
-docker-compose push barcode-server
+
+docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag bradbarnhill/barcode-api:latest .

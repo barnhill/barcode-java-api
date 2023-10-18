@@ -1,13 +1,10 @@
-version: '3.9'
 services:
-  barcode-server:
-    container_name: barcode-server
-    image: bradbarnhill/barcode-api:latest
-    networks:
-      - spring-cloud-network
+  linux-arm64:
+    platform: linux/arm64
+    # Linux Container
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
       args:
         BARCODE_SSL_PASSWORD: ${BARCODE_SSL_PASSWORD}
     ports:
@@ -16,7 +13,23 @@ services:
       - 8080
     environment:
       - BARCODE_SSL_PASSWORD=${BARCODE_SSL_PASSWORD}
-
-networks:
-  spring-cloud-network:
-    driver: bridge
+    image: bradbarnhill/barcode-api:arm64
+    networks:
+      - spring-cloud-network
+  linux-amd64:
+    platform: linux/amd64
+    # Linux Container
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BARCODE_SSL_PASSWORD: ${BARCODE_SSL_PASSWORD}
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    environment:
+      - BARCODE_SSL_PASSWORD=${BARCODE_SSL_PASSWORD}
+    image: bradbarnhill/barcode-api:amd64
+    networks:
+      - spring-cloud-network
