@@ -25,8 +25,8 @@ public class BarcodeController extends AbstractV1Resource {
     @GetMapping(value = "/barcode/{type}/data/{data}")
     @Cacheable("barcodes")
     public ResponseEntity<byte[]> getBarcodeImage(
-            @PathVariable String type,
-            @PathVariable String data,
+            @PathVariable(name = "type") String type,
+            @PathVariable(name = "data") String data,
             @RequestParam(name = "w") Optional<Integer> width,
             @RequestParam(name = "h") Optional<Integer> height,
             @RequestParam(name = "label") Optional<Boolean> includeLabel,

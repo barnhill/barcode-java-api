@@ -1,6 +1,6 @@
 [versions]
 #libs
-barcode = "2.4"
+barcode = "2.5"
 openapi-ui = "2.3.0"
 
 #plugins
