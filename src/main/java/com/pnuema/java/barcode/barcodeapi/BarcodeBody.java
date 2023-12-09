@@ -6,6 +6,7 @@ import java.util.Optional;
 public class BarcodeBody {
     private String type;
     private String data;
+    private String imageFormat;
     private Integer w;
     private Integer h;
     private boolean label;
@@ -26,6 +27,18 @@ public class BarcodeBody {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public void setImageFormat(String imageFormat) {
+        this.imageFormat = imageFormat;
+    }
+
+    public Optional<String> getImageFormat() {
+        if (imageFormat == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(imageFormat);
+        }
     }
 
     public Optional<Integer> getW() {

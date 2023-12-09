@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 public class BarcodeController extends AbstractV1Resource {
@@ -27,6 +29,7 @@ public class BarcodeController extends AbstractV1Resource {
     public ResponseEntity<byte[]> getBarcodeImage(
             @PathVariable(name = "type") String type,
             @PathVariable(name = "data") String data,
+            @RequestParam(name = "imageFormat") Optional<String> imageFormat,
             @RequestParam(name = "w") Optional<Integer> width,
             @RequestParam(name = "h") Optional<Integer> height,
             @RequestParam(name = "label") Optional<Boolean> includeLabel,
@@ -36,6 +39,7 @@ public class BarcodeController extends AbstractV1Resource {
         return generateBarcode(
                 type,
                 data,
+                imageFormat,
                 width,
                 height,
                 includeLabel,
@@ -53,6 +57,7 @@ public class BarcodeController extends AbstractV1Resource {
         return generateBarcode(
                 body.getType(),
                 body.getData(),
+                body.getImageFormat(),
                 body.getW(),
                 body.getH(),
                 body.isLabel(),
@@ -64,6 +69,7 @@ public class BarcodeController extends AbstractV1Resource {
     private ResponseEntity<byte[]> generateBarcode(
             String type,
             String data,
+            Optional<String> imageFormat,
             Optional<Integer> width,
             Optional<Integer> height,
             Optional<Boolean> includeLabel,
@@ -82,7 +88,22 @@ public class BarcodeController extends AbstractV1Resource {
 
         HttpHeaders responseHeaders = new HttpHeaders();
 
-        if (typeEnum == null) {
+        String imageFormatInternal;
+        MediaType imageFormatMimeType;
+        String imageFormatHeader = "";
+        if (imageFormat.isPresent()) {
+            imageFormatInternal = imageFormat.get();
+            imageFormatMimeType = getImageFormat(imageFormatInternal);
+            if (imageFormatMimeType != null) {
+                imageFormatHeader = getImageFormatHeader(imageFormatInternal);
+            }
+        } else {
+            imageFormatInternal = "png";
+            imageFormatHeader = MediaType.IMAGE_PNG_VALUE;
+            imageFormatMimeType = MediaType.IMAGE_PNG;
+        }
+
+        if (typeEnum == null || imageFormatMimeType == null || imageFormatHeader == null) {
             return ResponseEntity
                     .badRequest()
                     .headers(responseHeaders)
@@ -120,8 +141,8 @@ public class BarcodeController extends AbstractV1Resource {
         return ResponseEntity
                 .ok()
                 .headers(responseHeaders)
-                .contentType(MediaType.IMAGE_PNG)
-                .body(getImgBytes(image));
+                .contentType(imageFormatMimeType)
+                .body(getImgBytes(image, imageFormatInternal));
     }
 
     private String getMachineName() {
@@ -172,14 +193,34 @@ public class BarcodeController extends AbstractV1Resource {
 
     }
 
-    private byte [] getImgBytes(BufferedImage image) throws IOException {
+    @Nullable
+    private MediaType getImageFormat(String imageFormat) {
+        return switch(imageFormat.toLowerCase()) {
+            case "gif" -> MediaType.IMAGE_GIF;
+            case "png" -> MediaType.IMAGE_PNG;
+            default -> null;
+        };
+    }
+
+    @Nullable
+    private String getImageFormatHeader(String imageFormat) {
+        return switch(imageFormat.toLowerCase()) {
+            case "gif" -> MediaType.IMAGE_GIF_VALUE;
+            case "png" -> MediaType.IMAGE_PNG_VALUE;
+            default -> null;
+        };
+    }
+
+    private byte [] getImgBytes(BufferedImage image, String imageFormat) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "PNG", baos);
-        return baos.toByteArray();
+        ImageIO.write(image, imageFormat.toUpperCase(), baos);
+        byte[] output = baos.toByteArray();
+        baos.close();
+        return output;
     }
 
     /**
-     *
+     * Convert hex color code to a java.awt.Color
      * @param colorStr e.g. "FFFFFF" or "00FFFF"
      * @return {@link Color}
      */
