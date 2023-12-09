@@ -17,7 +17,6 @@ plugins {
 }
 
 group = "com.pnuema.java.barcode"
-version "2.5"
 
 dependencies {
     implementation(libs.barcode)
