@@ -1,11 +1,11 @@
 [versions]
 #libs
-barcode = "2.5"
+barcode = "2.6.1"
 openapi-ui = "2.3.0"
 
 #plugins
-kotlin= "1.9.21"
-springBootVersion="3.2.0"
+kotlin= "1.9.22"
+springBootVersion="3.2.2"
 springDepManagementVersion = "1.1.4"
 
 [libraries]

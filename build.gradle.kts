@@ -1,5 +1,5 @@
 buildscript {
-    extra["gradleVersion"] = "8.5"
+    extra["gradleVersion"] = "8.6"
 }
 
 val gradleVersion: String by extra
@@ -39,8 +39,8 @@ tasks {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     bootJar {
