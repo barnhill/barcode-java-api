@@ -1,5 +1,8 @@
-buildscript {
-    extra["gradleVersion"] = "8.6"
+tasks {
+    wrapper {
+        gradleVersion = "8.6"
+        distributionType = Wrapper.DistributionType.BIN
+    }
 }
 
 val gradleVersion: String by extra
@@ -38,10 +41,7 @@ tasks {
         useJUnitPlatform()
     }
 
-    java {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
+    java.toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion.toInt()))
 
     bootJar {
         archiveFileName.set("barcode-api.jar")
