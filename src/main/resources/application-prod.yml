@@ -10,3 +10,10 @@ server:
   error:
     whitelabel:
       enabled: false
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
