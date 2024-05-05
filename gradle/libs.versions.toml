@@ -4,8 +4,8 @@ barcode = "2.6.3"
 openapi-ui = "2.5.0"
 
 #plugins
-kotlin= "1.9.22"
-springBootVersion="3.2.4"
+kotlin= "1.9.23"
+springBootVersion="3.2.5"
 springDepManagementVersion = "1.1.4"
 
 [libraries]
