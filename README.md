@@ -11,7 +11,7 @@ Barcode Java API is a lightweight and easy-to-use Java library for generating ba
 - **Customizable:** Easily customize barcode size, color, text, and other properties to suit your needs.
 - **Platform Independent:** Works seamlessly on any platform that supports Java and Docker.
 - **Lightweight:** Small footprint, ideal for integration into existing projects without adding unnecessary overhead.
-- **Open Source:** Licensed under the Apache 2.0 License, allowing for free and open usage in both commercial and non-commercial projects.
+- **Open Source:** Licensed under the MIT License, allowing for free and open usage in both commercial and non-commercial projects.
 
 ## Supported Symbologies
 
