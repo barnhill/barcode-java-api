@@ -159,6 +159,7 @@ public class BarcodeController extends AbstractV1Resource {
         return switch (type.toLowerCase()) {
             case "telepen" -> EncodingType.TELEPEN;
             case "standard2of5", "industrial2of5" -> EncodingType.Standard2of5;
+            case "iata2of5" -> EncodingType.IATA2of5;
             case "postnet" -> EncodingType.PostNet;
             case "pharmacode" -> EncodingType.PHARMACODE;
             case "msi2mod10" -> EncodingType.MSI_2Mod10;
