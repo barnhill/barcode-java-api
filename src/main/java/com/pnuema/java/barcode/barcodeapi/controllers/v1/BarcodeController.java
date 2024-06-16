@@ -159,7 +159,7 @@ public class BarcodeController extends AbstractV1Resource {
         return switch (type.toLowerCase()) {
             case "telepen" -> EncodingType.TELEPEN;
             case "standard2of5", "industrial2of5" -> EncodingType.Standard2of5;
-            //case "iata2of5" -> EncodingType.IATA2of5;
+            case "iata2of5" -> EncodingType.IATA2of5;
             case "postnet" -> EncodingType.PostNet;
             case "pharmacode" -> EncodingType.PHARMACODE;
             case "msi2mod10" -> EncodingType.MSI_2Mod10;
@@ -182,7 +182,7 @@ public class BarcodeController extends AbstractV1Resource {
             case "code11", "usd8" -> EncodingType.CODE11;
             case "codabar" -> EncodingType.Codabar;
             case "upca", "ucc12" -> EncodingType.UPCA;
-            case "upc3" -> EncodingType.UPCE;
+            case "upce" -> EncodingType.UPCE;
             case "upcsup2" -> EncodingType.UPC_SUPPLEMENTAL_2DIGIT;
             case "upcsup5" -> EncodingType.UPC_SUPPLEMENTAL_5DIGIT;
             case "ean8" -> EncodingType.EAN8;
