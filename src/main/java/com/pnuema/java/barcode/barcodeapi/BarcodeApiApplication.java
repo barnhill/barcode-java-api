@@ -22,6 +22,8 @@ public class BarcodeApiApplication {
 
     @Bean
     public ShallowEtagHeaderFilter shallowEtagHeaderFilter() {
-        return new ShallowEtagHeaderFilter();
+        ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
+        filter.setWriteWeakETag(true);
+        return filter;
     }
 }

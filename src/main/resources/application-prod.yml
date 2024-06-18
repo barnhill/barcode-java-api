@@ -4,6 +4,8 @@ server:
     enabled: true
   compression:
     enabled: true
+    min-response-size: 2048
+    mime-types: application/hal+json,application/json,application/xml,text/html,text/xml,text/plain,image/png
   servlet:
     session:
       timeout: 10s
