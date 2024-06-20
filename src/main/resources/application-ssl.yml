@@ -1,0 +1,24 @@
+server:
+  port: 8443
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+    min-response-size: 2048
+    mime-types: application/hal+json,application/json,application/xml,text/html,text/xml,text/plain,image/png
+  servlet:
+    session:
+      timeout: 10s
+  error:
+    whitelabel:
+      enabled: false
+  ssl:
+    certificate: /ssl/fullchain.pem
+    certificate-private-key: /ssl/privkey.pem
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG

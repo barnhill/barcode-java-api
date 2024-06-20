@@ -27,21 +27,63 @@ Barcode Java API is a lightweight and easy-to-use Java library for generating ba
 
 ## Usage
 
+To use SSL:
+
+- Mount a docker volume `/ssl` that points to a host folder that contains the SSL certificates for the server.
+Name the full chain certificate as `fullchain.pem` and the private key as `privkey.pem`
+- Pass the environment variable to the container: `PROFILE=prod`
+
+To use without SSL:
+- Pass the environment variable to the container: `PROFILE=nossl` or pass no value for `PROFILE`
+
 ```
-docker run --rm -p 8080:8080 bradbarnhill/barcode-api
+docker run --rm -p 8443:8443 bradbarnhill/barcode-api
 ```
 
-Then browse to the following url to check out the documentation:
-```
-http://localhost:8080/swagger-ui/index.html
-```
 
+### Test
 To generate a sample barcode using this API go to:
+#### SSL
+```
+https://localhost:8443/v1/barcode/upca/data/636711605328?imageFormat=png&w=600&h=300&label=false
+```
+
+#### No SSL
 ```
 http://localhost:8080/v1/barcode/upca/data/636711605328?imageFormat=png&w=600&h=300&label=false
 ```
 
-Error codes will be returned in the headers for cases of invalid input parameters.
+## Response Headers
+#### Error codes will be returned in the headers for cases of invalid input parameters.
+
+|      Header       |                                              Value                                              |
+|:-----------------:|:-----------------------------------------------------------------------------------------------:|
+| x-error |                                     EUPCA-1: Data length invalid. (Length must be 11 or 12)        |
+
+#### Standard Headers
+
+|      Header       |                                              Value                                              |
+|:-----------------:|:-----------------------------------------------------------------------------------------------:|
+| X-Barcode-Version |                                     Barcode for Java 2.6.4                                      |
+|    X-Draw-Time    |                                           0.374072 ms                                           |
+|  X-Encoded-Type   |                                              UPCA                                               |
+|  X-Encoded-Value  | 10100110010010011011110101000110110001010111101010100010010010001110100111001011001101101100101 |
+|  X-Encoding-Time  |                                           0.576274 ms                                           |
+|   X-Label-Font    |                                              Serif                                              |
+|    X-Raw-Value    |                                          123456789012                                           |
+|    X-Served-By    |                                   barcode-api-c9f7bdd88-rq9wp                                   |
+|    X-Served-By    |                                     barcode.someserver.com                                      |
+
+## Documentation:
+#### SSL
+```
+https://localhost:8443/swagger-ui/index.html
+```
+
+#### No SSL
+```
+http://localhost:8080/swagger-ui/index.html
+```
 
 ## Contributing
 

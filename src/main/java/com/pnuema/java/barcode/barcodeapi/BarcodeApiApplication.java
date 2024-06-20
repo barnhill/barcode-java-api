@@ -11,7 +11,7 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 @OpenAPIDefinition(servers = {
         @Server(url = "https://barcode.pnuema.com/", description = "Remote"),
         @Server(url = "https://barcodeapi.link/", description = "Remote"),
-        @Server(url = "http://localhost:8080/", description = "Local")
+        @Server(url = "http://localhost:8443/", description = "Local")
 })
 @SpringBootApplication
 @EnableCaching
