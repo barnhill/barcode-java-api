@@ -30,14 +30,18 @@ Barcode Java API is a lightweight and easy-to-use Java library for generating ba
 To use SSL:
 
 - Mount a docker volume `/ssl` that points to a host folder that contains the SSL certificates for the server.
-Name the full chain certificate as `fullchain.pem` and the private key as `privkey.pem`
-- Pass the environment variable to the container: `PROFILE=prod`
+Name the full chain certificate as `certificate.pem` and the private key as `key.pem`
+- Pass the environment variable to the container: `PROFILE=ssl`
+
+```
+docker run --rm -p -e PROFILE=ssl 8443:8443 bradbarnhill/barcode-api
+```
 
 To use without SSL:
 - Pass the environment variable to the container: `PROFILE=nossl` or pass no value for `PROFILE`
 
 ```
-docker run --rm -p 8443:8443 bradbarnhill/barcode-api
+docker run --rm -p 8080:8080 bradbarnhill/barcode-api
 ```
 
 

@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+      - "8443:8443"
     expose:
       - 8080
     image: bradbarnhill/barcode-api:arm64
@@ -18,6 +19,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+      - "8443:8443"
     expose:
       - 8080
     image: bradbarnhill/barcode-api:amd64
