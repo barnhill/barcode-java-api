@@ -3,6 +3,7 @@ MAINTAINER bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /
 
+ARG PROFILE
 ENV PROFILE=${PROFILE:-nossl}
 
 VOLUME /tmp
