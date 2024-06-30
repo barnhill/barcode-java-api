@@ -3,6 +3,7 @@ package com.pnuema.java.barcode.barcodeapi.controllers.v1;
 import com.pnuema.java.barcode.Barcode;
 import com.pnuema.java.barcode.EncodingType;
 import com.pnuema.java.barcode.barcodeapi.BarcodeBody;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,36 +23,12 @@ import java.util.Optional;
 @RestController
 public class BarcodeController extends AbstractV1Resource {
 
-    @GetMapping(value = "/barcode/{type}/data/{data}")
-    @Cacheable("barcodes")
-    public ResponseEntity<byte[]> getBarcodeImage(
-            @PathVariable(name = "type") String type,
-            @PathVariable(name = "data") String data,
-            @RequestParam(name = "imageFormat") Optional<String> imageFormat,
-            @RequestParam(name = "w") Optional<Integer> width,
-            @RequestParam(name = "h") Optional<Integer> height,
-            @RequestParam(name = "label") Optional<Boolean> includeLabel,
-            @RequestParam(name = "barcolor") Optional<String> barColor,
-            @RequestParam(name = "background") Optional<String> background) throws IOException {
-
-        return generateBarcode(
-                type,
-                data,
-                imageFormat,
-                width,
-                height,
-                includeLabel,
-                barColor,
-                background
-        );
-    }
-
     @PostMapping(value = "/barcode/",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            consumes = { MediaType.APPLICATION_JSON_VALUE },
+            produces = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE }
+    )
     @Cacheable("barcodes")
     public ResponseEntity<byte[]> getBarcodeImage(@RequestBody BarcodeBody body) throws IOException {
-
         return generateBarcode(
                 body.getType(),
                 body.getData(),
@@ -64,6 +41,58 @@ public class BarcodeController extends AbstractV1Resource {
         );
     }
 
+    @GetMapping(
+            name = "barcode",
+            value = "/barcode/{type}/data/{data}",
+            produces = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE }
+    )
+    @Cacheable("barcodes")
+    public ResponseEntity<byte[]> getBarcodeImage(
+            @Schema(example = "upca", implementation = EncodingType.class, defaultValue = "upca")
+            @PathVariable(name = "type")
+            String type,
+
+            @Schema(example = "123456789012")
+            @PathVariable(name = "data")
+            String data,
+
+            @Schema(example = "png", allowableValues = { "png", "jpg", "gif" }, defaultValue = "png")
+            @RequestParam(name = "imageFormat")
+            Optional<String> imageFormat,
+
+            @Schema(example = "400")
+            @RequestParam(name = "w")
+            Optional<Integer> width,
+
+            @Schema(example = "200")
+            @RequestParam(name = "h")
+            Optional<Integer> height,
+
+            @Schema(allowableValues = { "false", "true" }, defaultValue = "false")
+            @RequestParam(name = "label", defaultValue = "false")
+            Optional<Boolean> includeLabel,
+
+            @Schema(example = "000000")
+            @RequestParam(name = "barcolor")
+            Optional<String> barColor,
+
+            @Schema(example = "ffffff")
+            @RequestParam(name = "background")
+            Optional<String> background
+
+    ) throws IOException {
+        return generateBarcode(
+                type,
+                data,
+                imageFormat,
+                width,
+                height,
+                includeLabel,
+                barColor,
+                background
+        );
+    }
+
     private ResponseEntity<byte[]> generateBarcode(
             String type,
             String data,
@@ -72,7 +101,8 @@ public class BarcodeController extends AbstractV1Resource {
             Optional<Integer> height,
             Optional<Boolean> includeLabel,
             Optional<String> barColor,
-            Optional<String> background) throws IOException {
+            Optional<String> background
+    ) throws IOException {
 
         Barcode barcode = new Barcode();
 
@@ -119,7 +149,11 @@ public class BarcodeController extends AbstractV1Resource {
         //attach debug info to header
         responseHeaders.set("x-barcode-version", barcode.getTitle() + " " + barcode.getVersion());
         responseHeaders.set("x-raw-value", barcode.getRawData());
-        responseHeaders.set("x-label-font", barcode.getLabelFont().getName());
+
+        if (barcode.isIncludeLabel()) {
+            responseHeaders.set("x-label-font", barcode.getLabelFont().getName());
+        }
+
         responseHeaders.set("x-served-by", getMachineName());
 
         if (exception != null || image == null) {
