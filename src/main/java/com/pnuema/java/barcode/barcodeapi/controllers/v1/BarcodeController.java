@@ -24,8 +24,7 @@ import java.util.Optional;
 public class BarcodeController extends AbstractV1Resource {
 
     @PostMapping(value = "/barcode/",
-            consumes = { MediaType.APPLICATION_JSON_VALUE },
-            produces = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE }
+            consumes = { MediaType.APPLICATION_JSON_VALUE }
     )
     @Cacheable("barcodes")
     public ResponseEntity<byte[]> getBarcodeImage(@RequestBody BarcodeBody body) throws IOException {
@@ -43,8 +42,7 @@ public class BarcodeController extends AbstractV1Resource {
 
     @GetMapping(
             name = "barcode",
-            value = "/barcode/{type}/data/{data}",
-            produces = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE }
+            value = "/barcode/{type}/data/{data}"
     )
     @Cacheable("barcodes")
     public ResponseEntity<byte[]> getBarcodeImage(
@@ -56,7 +54,7 @@ public class BarcodeController extends AbstractV1Resource {
             @PathVariable(name = "data")
             String data,
 
-            @Schema(example = "png", allowableValues = { "png", "jpg", "gif" }, defaultValue = "png")
+            @Schema(example = "png", allowableValues = { "png", "gif" }, defaultValue = "png")
             @RequestParam(name = "imageFormat")
             Optional<String> imageFormat,
 
