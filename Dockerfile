@@ -1,5 +1,5 @@
 FROM amazoncorretto:21-alpine
-MAINTAINER bradfordbarnhill@gmail.com
+LABEL maintainer=bradfordbarnhill@gmail.com
 
 ADD build/libs/barcode-api.jar /
 
