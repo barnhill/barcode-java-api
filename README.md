@@ -68,7 +68,7 @@ http://localhost:8080/v1/barcode/upca/data/636711605328?imageFormat=png&w=600&h=
 
 |      Header       |                                              Value                                              |
 |:-----------------:|:-----------------------------------------------------------------------------------------------:|
-| X-Barcode-Version |                                     Barcode for Java 2.7.2                                      |
+| X-Barcode-Version |                                     Barcode for Java 2.7.3                                      |
 |    X-Draw-Time    |                                           0.374072 ms                                           |
 |  X-Encoded-Type   |                                              UPCA                                               |
 |  X-Encoded-Value  | 10100110010010011011110101000110110001010111101010100010010010001110100111001011001101101100101 |
