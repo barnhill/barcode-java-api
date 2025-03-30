@@ -10,6 +10,7 @@ services:
       - "8443:8443"
     expose:
       - 8080
+      - 8443
     image: bradbarnhill/barcode-api:arm64
   linux-amd64:
     platform: linux/amd64
@@ -22,4 +23,5 @@ services:
       - "8443:8443"
     expose:
       - 8080
+      - 8443
     image: bradbarnhill/barcode-api:amd64

@@ -5,7 +5,7 @@ openapi-ui = "2.8.5"
 
 #plugins
 kotlin= "2.0.21"
-springBootVersion="3.4.3"
+springBootVersion="3.4.4"
 springDepManagementVersion = "1.1.7"
 
 [libraries]
