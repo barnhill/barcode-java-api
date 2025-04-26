@@ -5,8 +5,6 @@ tasks {
     }
 }
 
-val gradleVersion: String by extra
-
 plugins {
     id("java")
     id("eclipse")
