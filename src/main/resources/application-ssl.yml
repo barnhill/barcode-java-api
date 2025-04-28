@@ -22,8 +22,8 @@ server:
     whitelabel:
       enabled: false
   ssl:
-    certificate: /ssl/certificate.pem
-    certificate-private-key: /ssl/key.pem
+    certificate: /ssl/cert.crt
+    certificate-private-key: /ssl/cert.key
 logging:
   level:
     org:
