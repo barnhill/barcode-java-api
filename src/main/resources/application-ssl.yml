@@ -31,3 +31,18 @@ logging:
         web:
           filter:
             CommonsRequestLoggingFilter: DEBUG
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+    version: OPENAPI-3-0
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+    groups-order: DESC
+    operations-sorter: method
+    disable-swagger-default-url: true
+    enabled: true
+  show-actuator: true
+  packages-to-scan: com.pnuema.java.barcode

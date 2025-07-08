@@ -1,6 +1,6 @@
 tasks {
     wrapper {
-        gradleVersion = "8.14"
+        gradleVersion = "8.14.3"
         distributionType = Wrapper.DistributionType.BIN
     }
 }
@@ -39,7 +39,11 @@ tasks {
         useJUnitPlatform()
     }
 
-    java.toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion.toInt()))
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion.toInt())) // Set your desired Java version here
+        }
+    }
 
     bootJar {
         archiveFileName.set("barcode-api.jar")
