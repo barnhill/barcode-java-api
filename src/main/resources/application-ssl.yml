@@ -1,12 +1,3 @@
-spring:
-  main:
-    web-application-type: SERVLET
-  application:
-    name: Barcode API
-  mvc:
-    view:
-      prefix: /public/
-      suffix: .html
 server:
   port: 8443
   http2:
@@ -24,25 +15,3 @@ server:
   ssl:
     certificate: /ssl/cert.crt
     certificate-private-key: /ssl/cert.key
-logging:
-  level:
-    org:
-      springframework:
-        web:
-          filter:
-            CommonsRequestLoggingFilter: DEBUG
-
-springdoc:
-  api-docs:
-    path: /api-docs
-    enabled: true
-    version: OPENAPI-3-0
-  swagger-ui:
-    path: /swagger-ui.html
-    display-request-duration: true
-    groups-order: DESC
-    operations-sorter: method
-    disable-swagger-default-url: true
-    enabled: true
-  show-actuator: true
-  packages-to-scan: com.pnuema.java.barcode
