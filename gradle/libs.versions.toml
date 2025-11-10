@@ -1,11 +1,11 @@
 [versions]
 #libs
 barcode = "2.8.0"
-openapi-ui = "2.8.9"
+openapi-ui = "2.8.14"
 
 #plugins
-kotlin= "2.2.0"
-springBootVersion="3.5.3"
+kotlin= "2.2.21"
+springBootVersion="3.5.7"
 springDepManagementVersion = "1.1.7"
 
 [libraries]
