@@ -1,6 +1,6 @@
 tasks {
     wrapper {
-        gradleVersion = "8.14.3"
+        gradleVersion = "9.7.1"
         distributionType = Wrapper.DistributionType.BIN
     }
 }
@@ -23,6 +23,8 @@ dependencies {
     implementation(libs.barcode)
     implementation(libs.spring.starter.web)
     implementation(libs.spring.starter.tomcat)
+    implementation(libs.spring.starter.cache)
+    implementation(libs.spring.actuator)
     implementation(libs.openapi.ui)
     implementation(libs.jackson.kotlin)
 

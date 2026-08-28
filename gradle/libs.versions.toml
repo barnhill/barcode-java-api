@@ -1,17 +1,19 @@
 [versions]
 #libs
 barcode = "2.8.0"
-openapi-ui = "2.8.14"
+openapi-ui = "3.0.0"
 
 #plugins
-kotlin= "2.2.21"
-springBootVersion="3.5.7"
+kotlin= "2.3.21"
+springBootVersion="4.1.1"
 springDepManagementVersion = "1.1.7"
 
 [libraries]
 jackson-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
 spring-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 spring-starter-tomcat = { group = "org.springframework.boot", name = "spring-boot-starter-tomcat" }
+spring-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator"}
+spring-starter-cache = { group = "org.springframework.boot", name = "spring-boot-starter-cache" }
 spring-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 openapi-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "openapi-ui" }
 barcode = { group = "com.pnuema.java", name = "barcode", version.ref = "barcode" }
