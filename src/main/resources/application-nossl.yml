@@ -9,6 +9,8 @@ server:
   servlet:
     session:
       timeout: 10s
-  error:
-    whitelabel:
-      enabled: false
+spring:
+  web:
+    error:
+      whitelabel:
+        enabled: false

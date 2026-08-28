@@ -9,9 +9,11 @@ server:
   servlet:
     session:
       timeout: 10s
-  error:
-    whitelabel:
-      enabled: false
   ssl:
     certificate: /ssl/cert.crt
     certificate-private-key: /ssl/cert.key
+spring:
+  web:
+    error:
+      whitelabel:
+        enabled: false

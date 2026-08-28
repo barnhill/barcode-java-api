@@ -5,10 +5,6 @@ spring:
     web-application-type: SERVLET
   application:
     name: Barcode API
-  mvc:
-    view:
-      prefix: /public/
-      suffix: .html
 
 logging:
   level:
@@ -29,6 +25,5 @@ springdoc:
     groups-order: DESC
     operations-sorter: method
     disable-swagger-default-url: true
-    enabled: true
   show-actuator: true
   packages-to-scan: com.pnuema.java.barcode
